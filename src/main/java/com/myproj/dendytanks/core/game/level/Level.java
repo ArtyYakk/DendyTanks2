@@ -192,7 +192,7 @@ public class Level {
     //Два метода для проверки проницаемости текстур, их отличие в способе округления (один для более точного прилета снаряда (Math.floor()), другой
     // для того, чтобы танки не заходили за текстуры)
     public boolean isPenetrable4Missile(float x, float y){
-        return TileType.fromNumeric(tileMap[(int)Math.floor(y/SCALED_TILE_SIZE)][(int)Math.floor(x/SCALED_TILE_SIZE)]).isPenetrable();
+        return TileType.fromNumeric(tileMap[(int)Math.floor(y/SCALED_TILE_SIZE)][(int)Math.floor(x/SCALED_TILE_SIZE)]).isPenetrable4Missile();
     }
 
     public boolean isPenetrable(float x, float y){

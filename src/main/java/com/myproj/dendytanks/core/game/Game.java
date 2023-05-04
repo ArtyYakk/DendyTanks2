@@ -125,11 +125,11 @@ public class Game implements Runnable{ // Runnable нужен для запус�
         player.update(input);
 
 
-        //Здесь связываются координаты снаряда с координатами плиток для их разрушения либо остановки снаряда
+        //Здесь связываются координаты снаряда с координатами плиток для их разрушения либо остановки снаряда игрока
         if(player.getMissile() != null){
              missile = player.getMissile();
 
-            if(lvl.isBreakable(missile.getX(),missile.getY())){
+            if( (lvl.isBreakable(missile.getX(),missile.getY()))&&(!lvl.isPenetrable4Missile(missile.getX(),missile.getY())) ){
                 lvl.deleteTile(missile.getX(), missile.getY());
                 missile.setBroken();
             } else if(!lvl.isPenetrable4Missile(missile.getX(), missile.getY())){

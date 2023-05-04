@@ -6,7 +6,7 @@ public enum TileType {
     METAL(2,false,false, false),
     WATER(3,false,false, true),
     GRASS(4,false,true,true),
-    ICE(5,true,true,true),
+    ICE(5,false,true,true),
     PLAYERS_SPAWN(6,false,true, true),
     ENEMIES_SPAWN(7,false,true, true);
     private int n;
