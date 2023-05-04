@@ -35,10 +35,11 @@ public class Level {
     public Level(TextureAtlas atlas, int numOfLevel, Display display, Input input, boolean isRedactable){
 
         levelFile = "res/level" + numOfLevel + ".lvl";
+
         String bufferPath = "res/buffer.lvl";
+        Utils.copyFile(levelFile, bufferPath);
 
         if(!isRedactable){ //Если редактирование разрешено, мы меняем оригинальный файл, в обратном же случае - только буферный
-            Utils.copyFile(levelFile, bufferPath);
             levelFile = bufferPath;
         }
 

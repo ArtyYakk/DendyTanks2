@@ -42,6 +42,7 @@ public class MenuController {
 ////////////////////////////////////////////////////////////////
     @FXML
     void play() {
+
         tanks.start(numOfLevel, isRedactable);
     }
 

@@ -10,10 +10,7 @@ import com.myproj.dendytanks.core.graphics.TextureAtlas;
 import com.myproj.dendytanks.core.utils.Time;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -42,6 +39,7 @@ public class Game implements Runnable{ // Runnable нужен для запус�
     private Missile pMissile; // Снаряд
     private Level lvl;
     private Display display;
+    private int startEnemyCount;
 
     public Game(){
         running = false;
@@ -67,6 +65,7 @@ public class Game implements Runnable{ // Runnable нужен для запус�
 
         Point playersPosition = lvl.getPLayersPosition();
         ArrayList<Point> enemiesPositions = lvl.getEnemiesPositions();
+        startEnemyCount = enemiesPositions.size();
 
 
         player = new Player((float)playersPosition.getX(), (float)playersPosition.getY(),0.5f,3, atlas, lvl);
@@ -170,15 +169,7 @@ public class Game implements Runnable{ // Runnable нужен для запус�
                     System.out.println("I lose");
                     eMissile.setBroken();
 
-                    display.getWindow().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                    renderYouLost();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    display.getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    display.destroy(); //Уничтожается окно и выполняется метод stop()
+                    youLost();
                 }
             }
 
@@ -202,6 +193,9 @@ public class Game implements Runnable{ // Runnable нужен для запус�
 
         } //КОНЕЦ ЦИКЛА
 
+        if(enemyList.isEmpty()) {
+            youWin();
+        }
         lvl.update();
     }
     private void render(){ // После того, как все вышеупомянутое расчитано, данная функция рисует следующую сцену
@@ -219,15 +213,44 @@ public class Game implements Runnable{ // Runnable нужен для запус�
         display.swapBuffers();
     }
 
-    private void renderYouLost(){ // После того, как все вышеупомянутое расчитано, данная функция рисует следующую сцену
+    private void youLost(){ // После того, как все вышеупомянутое расчитано, данная функция рисует следующую сцену
+        display.getWindow().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         display.clear();
         graphics.setFont(new Font(Font.MONOSPACED, Font.BOLD,80));
-        graphics.drawString("YOU LOST",WIDTH/2 - 25*8, HEIGTH/2);
+        graphics.drawString("YOU LOST", WIDTH/2 - 25*8, HEIGTH/2 - 50);
+        graphics.setColor(new Color(0xBF6830));
+        graphics.drawString("SCORE:" + (startEnemyCount - enemyList.size()), WIDTH/2 - 25*8, HEIGTH/2 + 50);
         display.swapBuffers();
         display.swapBuffers();
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        display.getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        display.destroy(); //Уничтожается окно и выполняется метод stop()
     }
+
+    private void youWin(){ // После того, как все вышеупомянутое расчитано, данная функция рисует следующую сцену
+        display.getWindow().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        display.clear();
+        graphics.setFont(new Font(Font.MONOSPACED, Font.BOLD,80));
+        graphics.drawString("YOU WIN",WIDTH/2 - 25*8, HEIGTH/2);
+        display.swapBuffers();
+        display.swapBuffers();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        display.getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        display.destroy(); //Уничтожается окно и выполняется метод stop()
+    }
+
     @Override
     public void run() { // Тут находится бесконечный цикл, который работает, пока не остановим игру
 
