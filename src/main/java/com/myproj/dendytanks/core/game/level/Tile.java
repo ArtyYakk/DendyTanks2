@@ -13,7 +13,7 @@ public class Tile {
     protected Tile(BufferedImage image, float scale, TileType type){
         this.type = type;
         this.image = Utils.resize(image, Math.round(image.getWidth()*scale), Math.round(image.getHeight()*scale));
-        Utils.removeBackground(image, 5_000);
+        Utils.removeBackground(this.image, 5000);
     }
     protected void render(Graphics2D g, float x, float y){
         g.drawImage(image, Math.round(x), Math.round(y), null);

@@ -43,8 +43,6 @@ public class Level {
             levelFile = bufferPath;
         }
 
-        System.out.println(isRedactable);
-
         tileMap = new Integer[TILES_IN_WIDTH][TILES_IN_HEIGTH];
         this.display = display;
 
@@ -169,6 +167,7 @@ public class Level {
     public void renderGrass(Graphics2D g){
         for(Point p : grassCords){
             tiles.get(TileType.GRASS).render(g, p.x, p.y);
+
         }
     }
 

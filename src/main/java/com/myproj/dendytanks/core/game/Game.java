@@ -67,12 +67,25 @@ public class Game implements Runnable{ // Runnable нужен для запус�
         ArrayList<Point> enemiesPositions = lvl.getEnemiesPositions();
         startEnemyCount = enemiesPositions.size();
 
-
-        player = new Player((float)playersPosition.getX(), (float)playersPosition.getY(),0.5f,3, atlas, lvl);
+        try {
+            player = new Player((float)playersPosition.getX(), (float)playersPosition.getY(),0.5f,3, atlas, lvl);
+        }
+        catch (RuntimeException e){
+            System.out.println("В файле levelN.lvl не указана начальная позиция игрока, она должна быть обозначена цифрой 6");
+            System.exit(1);
+        }
 
         for (Point p : enemiesPositions) {
             enemyList.add(new Enemy((float)p.getX(),(float)p.getY(),0.5f,3, atlas,lvl));
         }
+
+        if (enemyList.isEmpty()){
+            System.out.println("В файле levelN.lvl не указано ни одной начальной позиции противника, она должна быть обозначена цифрой 7");
+            System.exit(1);
+        }
+
+
+
 
 
         //При закрытии окна игра останавливается
@@ -80,15 +93,10 @@ public class Game implements Runnable{ // Runnable нужен для запус�
             @Override
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
-
-                System.out.println("You just closed the window");
                 stop();
             }
         });
 
-
-
-        
         running = true;
         gameThread = new Thread(this);
         gameThread.start();
@@ -107,8 +115,6 @@ public class Game implements Runnable{ // Runnable нужен для запус�
 
         try {
             gameThread.join();
-
-            System.out.println("STOP");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
