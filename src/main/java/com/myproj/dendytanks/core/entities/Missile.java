@@ -53,10 +53,18 @@ public class Missile extends Entity {
 
         this.direction = direction;
         switch (direction){
-            case 0 -> heading = Heading.NORTH;
-            case 1 -> heading = Heading.EAST;
-            case 2 -> heading = Heading.SOUTH;
-            case 3 -> heading = Heading.WEST;
+            case 0:
+                heading = Heading.NORTH;
+                break;
+            case 1:
+                heading = Heading.EAST;
+                break;
+            case 2:
+                heading = Heading.SOUTH;
+                break;
+            case 3:
+                heading = Heading.WEST;
+                break;
         }
 
         for(Heading h : Heading.values()){
@@ -75,10 +83,18 @@ public class Missile extends Entity {
     public void update(Input input) {
 
         switch (heading){
-            case NORTH -> y-=speed;
-            case EAST -> x+=speed;
-            case SOUTH -> y+=speed;
-            case WEST -> x-=speed;
+            case NORTH:
+                y-=speed;
+                break;
+            case EAST:
+                x+=speed;
+                break;
+            case SOUTH:
+                y+=speed;
+                break;
+            case WEST:
+                x-=speed;
+                break;
         }
 
         if(x < 0){

@@ -55,10 +55,18 @@ public class Enemy extends Entity {
         this.lvl = lvl;
 
         switch (rand){ //Начальное направление танка
-            case 1 -> heading = Heading.NORTH;
-            case 2 -> heading = Heading.EAST;
-            case 3 -> heading = Heading.SOUTH;
-            case 4 -> heading = Heading.WEST;
+            case 1:
+                heading = Heading.NORTH;
+                break;
+            case 2:
+                heading = Heading.EAST;
+                break;
+            case 3:
+                heading = Heading.SOUTH;
+                break;
+            case 4:
+                heading = Heading.WEST;
+                break;
         }
 
         for(Heading h : Heading.values()){
@@ -88,10 +96,18 @@ public class Enemy extends Entity {
         //Выстрел в направлении танка
         if(missile == null){
             switch (heading){
-                case NORTH -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 0, true);
-                case EAST -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 1,true);
-                case SOUTH -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 2,true);
-                case WEST -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 3,true);
+                case NORTH:
+                    missile = new Missile(x + missileX,y,scale,speed*2, atlas, 0, true);
+                    break;
+                case EAST:
+                    missile = new Missile(x + missileX,y,scale,speed*2, atlas, 1,true);
+                    break;
+                case SOUTH:
+                    missile = new Missile(x + missileX,y,scale,speed*2, atlas, 2,true);
+                    break;
+                case WEST:
+                    missile = new Missile(x + missileX,y,scale,speed*2, atlas, 3,true);
+                    break;
             }
         }
 
@@ -105,10 +121,18 @@ public class Enemy extends Entity {
 
         //Перемещение по координатам с заданной скоростью в соответствии с направлением танка
         switch (heading){
-            case NORTH -> newY-=speed;
-            case EAST -> newX+=speed;
-            case SOUTH -> newY+=speed;
-            case WEST -> newX-=speed;
+            case NORTH:
+                newY-=speed;
+                break;
+            case EAST:
+                newX+=speed;
+                break;
+            case SOUTH:
+                newY+=speed;
+                break;
+            case WEST:
+                newX-=speed;
+                break;
         }
 
         //Проверка на выход за границы рабочего поля по oX
@@ -130,7 +154,8 @@ public class Enemy extends Entity {
 
         //ПРОВЕРКА НА ЗАСТУП ЗА ТЕКСТУРЫ НЕПРОНИЦАЕМЫХ ОБЪЕКТОВ
         switch (heading){
-            case NORTH -> {
+            case NORTH:
+            {
                 if(!lvl.isPenetrable(newX - 2,newY - 7) //Препятствие сверху
                         ||(!lvl.isPenetrable(newX + getSpriteWidth()/2f - 18/2f,newY - 7)) //Препятствие сверху (середина)
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18,newY - 7)) //Препятствие сверху (правее)
@@ -139,7 +164,9 @@ public class Enemy extends Entity {
                     changeDirection();
                 }
             }
-            case EAST -> {
+            break;
+            case EAST:
+            {
                 if(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY - 3) //Препятствие справа
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY + getSpriteHeight()/2f - 18/2f)) //Препятствие справа (середина)
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY + getSpriteHeight() - 18)) //Препятствие справа (ниже)
@@ -148,7 +175,9 @@ public class Enemy extends Entity {
                     changeDirection();
                 }
             }
-            case SOUTH -> {
+            break;
+            case SOUTH:
+            {
                 if(!lvl.isPenetrable(newX - 2, newY + getSpriteHeight() - 17) //Препятствие снизу
                         ||(!lvl.isPenetrable(newX + getSpriteWidth()/2f - 18/2f,newY + getSpriteHeight() - 17)) //Препятствие снизу (середина)
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18,newY + getSpriteHeight() - 17)) //Препятствие снизу (правее)
@@ -157,7 +186,9 @@ public class Enemy extends Entity {
                     changeDirection();
                 }
             }
-            case WEST -> {
+            break;
+            case WEST:
+            {
                 if(!lvl.isPenetrable(newX - 7, newY - 3) //Препятствие слева
                         ||(!lvl.isPenetrable(newX - 7, newY + getSpriteHeight()/2f - 18/2f)) //Препятствие слева (середина)
                         ||(!lvl.isPenetrable(newX - 7, newY + getSpriteHeight() - 18)) //Препятствие слева (ниже)
@@ -166,6 +197,7 @@ public class Enemy extends Entity {
                     changeDirection();
                 }
             }
+            break;
         }
 
         //Теперь можно приравнивать к постоянным x и y
@@ -193,42 +225,73 @@ public class Enemy extends Entity {
 
         switch (heading){
 
-            case NORTH -> {
+            case NORTH:
+            {
                 rand = 1 + (int)(Math.random()*3);
                 switch (rand) {
-                    case 1 -> heading = Heading.EAST;
-                    case 2 -> heading = Heading.SOUTH;
-                    case 3 -> heading = Heading.WEST;
+                    case 1:
+                        heading = Heading.EAST;
+                        break;
+                    case 2:
+                        heading = Heading.SOUTH;
+                        break;
+                    case 3:
+                        heading = Heading.WEST;
+                        break;
                 }
             }
+            break;
 
-            case EAST -> {
+            case EAST:
+                {
                 rand = 1 + (int)(Math.random()*3);
                 switch (rand) {
-                    case 1 -> heading = Heading.SOUTH;
-                    case 2 -> heading = Heading.WEST;
-                    case 3 -> heading = Heading.NORTH;
+                    case 1:
+                        heading = Heading.SOUTH;
+                        break;
+                    case 2:
+                        heading = Heading.WEST;
+                        break;
+                    case 3:
+                        heading = Heading.NORTH;
+                        break;
                 }
             }
+            break;
 
-            case SOUTH -> {
+            case SOUTH:
+            {
                 rand = 1 + (int)(Math.random()*3);
                 switch (rand) {
-                    case 1 -> heading = Heading.WEST;
-                    case 2 -> heading = Heading.NORTH;
-                    case 3 -> heading = Heading.EAST;
+                    case 1:
+                        heading = Heading.WEST;
+                        break;
+                    case 2:
+                        heading = Heading.NORTH;
+                        break;
+                    case 3:
+                        heading = Heading.EAST;
+                        break;
                 }
             }
+            break;
 
-            case WEST -> {
+            case WEST:
+            {
                 rand = 1 + (int)(Math.random()*3);
                 switch (rand) {
-                    case 1 -> heading = Heading.NORTH;
-                    case 2 -> heading = Heading.EAST;
-                    case 3 -> heading = Heading.SOUTH;
+                    case 1:
+                        heading = Heading.NORTH;
+                        break;
+                    case 2:
+                        heading = Heading.EAST;
+                        break;
+                    case 3:
+                        heading = Heading.SOUTH;
+                        break;
                 }
             }
-
+            break;
         }
 
     }

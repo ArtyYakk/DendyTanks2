@@ -78,10 +78,18 @@ public class Player extends Entity {
         if(input.getKey(KeyEvent.VK_S)){  //Выстрел в направлении танка
            if(missile == null){
                switch (heading){
-                   case NORTH -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 0, false);
-                   case EAST -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 1,false);
-                   case SOUTH -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 2,false);
-                   case WEST -> missile = new Missile(x + missileX,y,scale,speed*2, atlas, 3,false);
+                   case NORTH:
+                       missile = new Missile(x + missileX,y,scale,speed*2, atlas, 0, false);
+                       break;
+                   case EAST:
+                       missile = new Missile(x + missileX,y,scale,speed*2, atlas, 1,false);
+                       break;
+                   case SOUTH:
+                       missile = new Missile(x + missileX,y,scale,speed*2, atlas, 2,false);
+                       break;
+                   case WEST:
+                       missile = new Missile(x + missileX,y,scale,speed*2, atlas, 3,false);
+                       break;
                }
            }
         }
@@ -114,7 +122,8 @@ public class Player extends Entity {
 
         //ПРОВЕРКА НА ЗАСТУП ЗА ТЕКСТУРЫ НЕПРОНИЦАЕМЫХ ОБЪЕКТОВ
         switch (heading){
-            case NORTH -> {
+            case NORTH:
+            {
                 if(!lvl.isPenetrable(newX - 2,newY - 7) //Препятствие сверху
                         ||(!lvl.isPenetrable(newX + getSpriteWidth()/2f - 18/2f,newY - 7)) //Препятствие сверху (середина)
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18,newY - 7)) //Препятствие сверху (правее)
@@ -122,6 +131,7 @@ public class Player extends Entity {
                     newY += speed;
                 }
             }
+            break;
             case EAST -> {
                 if(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY - 3) //Препятствие справа
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY + getSpriteHeight()/2f - 18/2f)) //Препятствие справа (середина)
