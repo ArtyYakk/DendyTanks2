@@ -132,7 +132,8 @@ public class Player extends Entity {
                 }
             }
             break;
-            case EAST -> {
+            case EAST:
+            {
                 if(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY - 3) //Препятствие справа
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY + getSpriteHeight()/2f - 18/2f)) //Препятствие справа (середина)
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18, newY + getSpriteHeight() - 18)) //Препятствие справа (ниже)
@@ -140,7 +141,9 @@ public class Player extends Entity {
                     newX -= speed;
                 }
             }
-            case SOUTH -> {
+            break;
+            case SOUTH:
+            {
                 if(!lvl.isPenetrable(newX - 2, newY + getSpriteHeight() - 17) //Препятствие снизу
                         ||(!lvl.isPenetrable(newX + getSpriteWidth()/2f - 18/2f,newY + getSpriteHeight() - 17)) //Препятствие снизу (середина)
                         ||(!lvl.isPenetrable(newX + getSpriteWidth() - 18,newY + getSpriteHeight() - 17)) //Препятствие снизу (правее)
@@ -148,7 +151,9 @@ public class Player extends Entity {
                     newY -= speed;
                 }
             }
-            case WEST -> {
+            break;
+            case WEST:
+            {
                 if(!lvl.isPenetrable(newX - 7, newY - 3) //Препятствие слева
                         ||(!lvl.isPenetrable(newX - 7, newY + getSpriteHeight()/2f - 18/2f)) //Препятствие слева (середина)
                         ||(!lvl.isPenetrable(newX - 7, newY + getSpriteHeight() - 18)) //Препятствие слева (ниже)
@@ -156,13 +161,11 @@ public class Player extends Entity {
                     newX += speed;
                 }
             }
+            break;
         }
 
         x = newX;
         y = newY;
-
-
-      // System.out.println(x + " " + y);
 
         if(missile != null){
             missile.update(input);

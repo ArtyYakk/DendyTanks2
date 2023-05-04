@@ -11,7 +11,6 @@ public class ResourceLoader  {
         BufferedImage image = null;
 
         try{
-            System.out.println(PATH + fileName);
             image = ImageIO.read(new File(PATH + fileName));
         }
         catch (IOException e){

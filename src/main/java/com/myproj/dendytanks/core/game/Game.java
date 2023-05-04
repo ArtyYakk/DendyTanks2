@@ -71,7 +71,8 @@ public class Game implements Runnable{ // Runnable нужен для запус�
             player = new Player((float)playersPosition.getX(), (float)playersPosition.getY(),0.5f,3, atlas, lvl);
         }
         catch (RuntimeException e){
-            System.out.println("В файле levelN.lvl не указана начальная позиция игрока, она должна быть обозначена цифрой 6");
+            JOptionPane.showMessageDialog(null, "В файле level[номер уровня].lvl не указана начальная позиция игрока, она должна быть обозначена цифрой 6"
+                    + "\nПуть к папке с файлом: DendyTanks2\\res");
             System.exit(1);
         }
 
@@ -80,7 +81,8 @@ public class Game implements Runnable{ // Runnable нужен для запус�
         }
 
         if (enemyList.isEmpty()){
-            System.out.println("В файле levelN.lvl не указано ни одной начальной позиции противника, она должна быть обозначена цифрой 7");
+            JOptionPane.showMessageDialog(null, "В файле level[номер уровня].lvl не указано ни одной начальной позиции противника, она должна быть обозначена цифрой 7"
+                    + "\nПуть к папке с файлом: DendyTanks2\\res");
             System.exit(1);
         }
 
@@ -172,7 +174,6 @@ public class Game implements Runnable{ // Runnable нужен для запус�
                         &&
                         ( (eMissile.getY() >= player.y) && (eMissile.getY() <= player.y + player.height) )
                 ){
-                    System.out.println("I lose");
                     eMissile.setBroken();
 
                     youLost();
